@@ -22,25 +22,25 @@ def users_list(request):
 @check_account
 def user_id(request, pk):
     try:
+        data = None
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
         return HttpResponse(status=404)
-
     if request.method == 'GET':
-        return _get_user_id(user=user)
-    if request.method == 'POST':
-        return _get_user_id(user=user)
-    if request.method == 'PUT':
-        return _get_user_id(user=user)
-    if request.method == 'DELETE':
-        return _get_user_id(user=user)
+        data = _get_user_id(user=user)
+    elif request.method == 'POST':
+        data = _get_user_id(user=user)
+    elif request.method == 'PUT':
+        data = _get_user_id(user=user)
+    elif request.method == 'DELETE':
+        data = _get_user_id(user=user)
+    return JsonResponse({
+        'message': 'user id',
+        'data': data
+    })
 
 
 def _get_user_id(user):
     res = UserSerializer(user, many=False)
-    print(res.data)
-    return JsonResponse({
-        'message': 'user id',
-        'data': res.data
-    })
+    return res.data
 

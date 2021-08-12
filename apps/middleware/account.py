@@ -1,17 +1,26 @@
+from django.http import JsonResponse, HttpResponse
+
 
 def check_account(response):
-    '''
-    :param response:
-    :return middleware account:
-    '''
     print('check account')
 
     def middleware(request, *args, **kwargs):
-        '''
-        :param request:
-        :return response data:
-        '''
-        print('request', request)
+        try:
+            r = request.headers['token']
+            print('token => ', r)
+            if r:
+                res = response(request, *args, **kwargs)
+        except:
+            return JsonResponse({'message': 'error access'}, status=401)
+        return res
+
+    return middleware
+
+
+def user_access_perm(response):
+    print('check access user.')
+
+    def middleware(request, *args, **kwargs):
         res = response(request, *args, **kwargs)
         return res
 

@@ -4,8 +4,6 @@ from .serializers import UserSerializer
 from .models import User
 from ..middleware.account import check_account
 
-# Create your views here.
-
 
 @api_view(['GET', 'POST'])
 @check_account
@@ -33,7 +31,8 @@ def user_id(request, pk):
     elif request.method == 'PUT':
         data = _get_user_id(user=user)
     elif request.method == 'DELETE':
-        data = _get_user_id(user=user)
+        user.delete()
+
     return JsonResponse({
         'message': 'user id',
         'data': data

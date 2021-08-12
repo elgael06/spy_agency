@@ -1,4 +1,7 @@
-from .models import User
+from .models import (
+    User,
+    UserAccount
+)
 from rest_framework.serializers import (
     ModelSerializer,
     IntegerField,
@@ -6,8 +9,6 @@ from rest_framework.serializers import (
     DateTimeField,
     BooleanField
 )
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 
 
 class UserSerializer(ModelSerializer):
@@ -20,6 +21,28 @@ class UserSerializer(ModelSerializer):
     created = DateTimeField(read_only=True)
     date_out = DateTimeField(read_only=True)
 
+    def create(self, validate_data) -> User:
+        return User.objects.create(**validate_data)
+
+    def update(self, instance, validated_data) -> User:
+        instance.name = validated_data.get('name', instance.name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.nikename = validated_data.get('nikename', instance.nikename)
+        instance.email = validated_data.get('email', instance.email)
+        instance.save()
+
+        return instance
+
     class Meta:
         model = User
-        fields = [ 'id', 'name', 'last_name', 'nikename', 'email', 'is_out', 'created', 'date_out' ]
+        fields = ['id', 'name', 'last_name', 'nikename', 'email', 'is_out', 'created', 'date_out']
+
+
+class UserAccountSerializer(ModelSerializer):
+    email = CharField(max_length=40)
+    password = CharField(default='')
+    token = CharField(default='')
+    date_update = DateTimeField(read_only=True)
+
+
+

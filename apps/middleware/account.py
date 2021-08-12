@@ -11,7 +11,7 @@ def check_account(response):
             if r:
                 res = response(request, *args, **kwargs)
         except:
-            return JsonResponse({'message': 'error access'}, status=401)
+            return JsonResponse({'message': 'access error!'}, status=401)
         return res
 
     return middleware

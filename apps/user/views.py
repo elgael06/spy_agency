@@ -1,4 +1,8 @@
-from django.http import JsonResponse, HttpResponse
+from django.http import (
+    JsonResponse,
+    HttpResponse
+)
+import json
 from rest_framework.decorators import api_view
 from .serializers import UserSerializer
 from .models import User
@@ -13,7 +17,18 @@ def users_list(request):
     print('users', users)
     res = UserSerializer(users, many=True)
     print(res.data)
-    return JsonResponse({'message':'list users', 'data': res.data})
+    return JsonResponse({'message': 'list users', 'data': res.data})
+
+
+@api_view(['POST'])
+def user_register(request):
+    user = json.loads(request.body)
+    res = UserSerializer(data=user)
+    if res.is_valid():
+        res.create(res.data)
+        return JsonResponse({'message': 'user save!', 'data': res.data})
+    else:
+        return JsonResponse({'message': 'Error: save user...'})
 
 
 @api_view(['GET', 'POST'])
@@ -25,8 +40,6 @@ def user_id(request, pk):
     except User.DoesNotExist:
         return HttpResponse(status=404)
     if request.method == 'GET':
-        data = _get_user_id(user=user)
-    elif request.method == 'POST':
         data = _get_user_id(user=user)
     elif request.method == 'PUT':
         data = _get_user_id(user=user)
@@ -42,4 +55,6 @@ def user_id(request, pk):
 def _get_user_id(user):
     res = UserSerializer(user, many=False)
     return res.data
+
+
 

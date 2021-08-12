@@ -18,8 +18,8 @@ class UserSerializer(ModelSerializer):
     nikename = CharField(max_length=20)
     email = CharField(max_length=40)
     is_out = BooleanField(default=False)
-    created = DateTimeField(read_only=True)
-    date_out = DateTimeField(read_only=True)
+    created = DateTimeField()
+    date_out = DateTimeField()
 
     def create(self, validate_data) -> User:
         return User.objects.create(**validate_data)
@@ -42,7 +42,10 @@ class UserAccountSerializer(ModelSerializer):
     email = CharField(max_length=40)
     password = CharField(default='')
     token = CharField(default='')
-    date_update = DateTimeField(read_only=True)
+    date_update = DateTimeField()
 
+    class Meta:
+        model = UserAccount
+        fields = ['id', 'email', 'password', 'token', 'date_update']
 
 

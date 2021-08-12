@@ -6,13 +6,13 @@ def check_account(response):
     '''
     print('check account')
 
-    def middleware(request):
+    def middleware(request, *args, **kwargs):
         '''
         :param request:
         :return response data:
         '''
         print('request', request)
-        res = response(request)
+        res = response(request, *args, **kwargs)
         return res
 
     return middleware

@@ -22,7 +22,7 @@ TPL_DIR = os.path.join(BASE_DIR, 'templates/')
 DB_FILE = os.path.join(BASE_DIR, 'database/db.sqlite3')
 CACHE_DIR = os.path.join(BASE_DIR, 'files/cache/')
 MEDIA = os.path.join(BASE_DIR, 'files/media/')
-STATIC = os.path.join(BASE_DIR, 'build/static/')
+STATIC = os.path.join(BASE_DIR, 'static/')
 STATIC_FILES = os.path.join(BASE_DIR, 'files/static_files/')
 
 

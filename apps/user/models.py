@@ -49,3 +49,6 @@ class UserAccount(models.Model):
         self.token = token
         return self.token
 
+    def get_user_where_email(self) -> User:
+        return User.objects.get(email=self.email)
+

@@ -98,10 +98,12 @@ def user_id(request, pk):
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
         return HttpResponse(status=404)
+
     if request.method == 'GET':
         data = _get_user_id(user=user)
     elif request.method == 'PUT':
-        data = _get_user_id(user=user)
+        print(request.body)
+        data = _update_user_id(user=user, body=request.body)
     elif request.method == 'DELETE':
         user.delete()
 
@@ -112,5 +114,30 @@ def user_id(request, pk):
 
 
 def _get_user_id(user):
+    res = UserSerializer(user, many=False)
+    return res.data
+
+
+def _update_user_id(body='', user=User):
+    data = json.loads(body) if body else dict()
+    name = data.get('name')
+    last_name = data.get('last_name')
+    nike_name = data.get('nike_name')
+    is_out = data.get('is_out')
+
+    print(name, last_name, nike_name, is_out)
+    if name:
+        user.name = name
+        user.update(update_fields=['name'])
+    if last_name:
+        user.last_name = last_name
+        user.update(update_fields=['last_name'])
+    if nike_name:
+        user.nikename = nike_name
+        user.update(update_fields=['nikename'])
+    if not (is_out is None):
+        user.is_out = is_out
+        user.update(update_fields=['is_out'])
+
     res = UserSerializer(user, many=False)
     return res.data

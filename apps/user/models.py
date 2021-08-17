@@ -18,7 +18,10 @@ class User(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         account = UserAccount(email=self.email)
         account.save()
-        super(User, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
+        super(User, self).save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
+
+    def update(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(User, self).save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
 
     class Meta:
         ordering = ['created']

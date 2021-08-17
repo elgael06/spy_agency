@@ -74,7 +74,6 @@ def user_account_logout(request, pk):
 def users_list(request):
     # user list active.
     users = User.objects.filter(is_out=False)
-    print('users', users)
     res = UserSerializer(users, many=True)
     print(res.data)
     return JsonResponse({'message': 'list users', 'data': res.data})

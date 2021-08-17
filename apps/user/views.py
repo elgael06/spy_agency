@@ -17,7 +17,9 @@ from ..middleware.account import check_account
 
 @api_view(['POST'])
 def user_account_login(request):
-    data = json.loads(request.body)
+
+    data = json.loads(request.body) if request.body else {'email': '', 'password': ''}
+
     try:
         email = data['email'] if data['email'] else ''
         password = data['password'] if data['password'] else ''
@@ -37,6 +39,7 @@ def user_account_login(request):
 
                 # create token to account and get serializer data.
                 login.create_token()
+                login.save()
                 account_serializer = UserAccountSerializer(login)
 
                 return JsonResponse({
@@ -88,7 +91,7 @@ def user_register(request):
         return JsonResponse({'message': 'Error: save user...'})
 
 
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 @check_account
 def user_id(request, pk):
     try:

@@ -56,7 +56,7 @@ def user_account_login(request):
             return HttpResponse(status=404)
 
     # User Not Exist Exception
-    except UserAccount.DoesNotExist:
+    except login.DoesNotExist:
         return JsonResponse({
             'message': 'ERROR:email not exist!'
         }, status=501)
@@ -97,12 +97,11 @@ def user_id(request, pk):
         data = None
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
-        return HttpResponse(status=404)
+        return JsonResponse({'message': 'User not exist!'}, status=404)
 
     if request.method == 'GET':
         data = _get_user_id(user=user)
     elif request.method == 'PUT':
-        print(request.body)
         data = _update_user_id(user=user, body=request.body)
     elif request.method == 'DELETE':
         user.delete()

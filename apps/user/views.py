@@ -56,7 +56,7 @@ def user_account_login(request):
             return HttpResponse(status=404)
 
     # User Not Exist Exception
-    except login.DoesNotExist:
+    except UserAccount.DoesNotExist:
         return JsonResponse({
             'message': 'ERROR:email not exist!'
         }, status=501)

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {
     BrowserRouter as Router,
     Switch,
@@ -8,12 +8,15 @@ import LoginRouter from "../../features/login/login.router";
 import HomeRouter from "../../features/home/home.router";
 import {useSelector} from "react-redux";
 import {selectSesion} from "../../features/login/loginSlice";
+import LayoutPrivate from "../../components/layout-private/layout-private";
 
 
 const PrivateRoute = () => (
     <Router>
             <Switch>
-                <Route path='/' component={HomeRouter} />
+                <LayoutPrivate>
+                    <Route path='/' component={HomeRouter} />
+                </LayoutPrivate>
             </Switch>
     </Router>
 );
@@ -26,13 +29,9 @@ const PubicRoute = () => (
     </Router>
 );
 
-const initState = ({
-    isLogin:false
-});
 
 const IndexRouter = () => {
     const  sesion = useSelector(selectSesion);
-    const [state, setState] = useState(initState);
 
     return  sesion!==null ? <PrivateRoute /> : <PubicRoute />;
 }

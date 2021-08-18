@@ -4,13 +4,9 @@ import {Layout} from "antd";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-        <Layout>
-            <IndexRouter />
-        </Layout>
-    </div>
+      <Layout style={{position:'absolute',left:0,right:0,bottom:0,top:0}}>
+          <IndexRouter />
+      </Layout>
   );
 }
 

@@ -7,6 +7,8 @@ import  {
     selectLogin,
 } from './loginSlice';
 
+const { Header, Content, Footer } = Layout;
+
 const Login = () => {
     const { email,password } = useSelector(selectLogin);
     const dispatch = useDispatch();
@@ -22,26 +24,40 @@ const Login = () => {
     }
 
     return < >
-        <Layout.Header>
-            <h1 style={{color:'#FFF'}}>This Is The Login Page</h1>
-        </Layout.Header>
+        <Header>
+            <h1 style={{color:'#FFF'}}>Login Page</h1>
+        </Header>
+
         <hr />
-        <Layout.Content style={{ padding: '10px 50px',textAlign:'center',justifyContent:'center' }}>
-             <Divider orientation="left">
-                 <h3>User Perfil</h3>
-             </Divider>
+        <Content style={{ display:'flex',textAlign:'center',justifyContent:'center', alignItems:'center' }}>
+
         <Form
-            style={{height:200,width:450,display:'flex',justifyContent:'space-between',flexDirection:'column',background: '#fff',padding:24}}
+            style={{
+                display:'flex',
+                marginTop:-120,
+                height:450,
+                width:450,
+                justifyContent:'space-between',
+                flexDirection:'column',
+                background: '#fff',
+                padding:'20px 35px'
+            }}
           name="basic"
           initialValues={{ remember: false }}
           labelCol={{ span: 5 }}
           wrapperCol={{ span: 21 }}
           onSubmitCapture={handleSubmit}
         >
+            <div>
+            <Divider>
+                 <h2>Sing in</h2>
+             </Divider>
+            </div>
+
             {/* email */}
             <Form.Item
-                label="Username"
-                name="username"
+                label="Email"
+                name="email"
                 rules={[{required: true,message: 'Please input your email!'},]}>
                 <Input
                     type='email'
@@ -62,9 +78,11 @@ const Login = () => {
                     onChange={e=>dispatch(handlePassword(e.target.value))}
                 />
               </Form.Item>
-            <Button type="primary" htmlType="submit" >Send</Button>
+            <Button shape="round" block type="primary" htmlType="submit" >ENTER</Button>
+            <hr />
+            <Footer><small>Company SPY</small></Footer>
         </Form>
-        </Layout.Content>
+        </Content>
     </>
 }
 

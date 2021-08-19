@@ -10,7 +10,7 @@ const LayoutLogin = ({
     children=null,
     handleSubmit=()=>{}
 }) => {
-
+  const [form] = Form.useForm();
 
     return < >
         <Header>
@@ -30,11 +30,14 @@ const LayoutLogin = ({
                     background: '#fff',
                     padding:'20px 35px'
                 }}
+                form={form}
               name="basic"
               initialValues={{ remember: false }}
-              labelCol={{ span: 5 }}
-              wrapperCol={{ span: 21 }}
               onSubmitCapture={handleSubmit}
+                wrapperCol={ {
+                      span: 25,
+                  }}
+                layout='vertical'
             >
                 <div>
                     <Divider>

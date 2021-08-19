@@ -14,5 +14,17 @@ export const singInUserApi = async ({
     axios.defaults.headers.put['Token'] = data.token;
     axios.defaults.headers.delete['Token'] = data.token;
 
-    return status==200 ? data : null;
+    return status===200 ? data : null;
+}
+
+export  const createAccountApi = async ({
+email='',
+last_name='',
+name='',
+nikename='',
+}) => {
+    const { status, data } = await axios.post('/api/user/register',
+        { email, last_name, name, nikename, });
+
+    return status===200 ? data : null;
 }

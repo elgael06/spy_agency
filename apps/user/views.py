@@ -81,13 +81,15 @@ def users_list(request):
 
 @api_view(['POST'])
 def user_register(request):
-    user = json.loads(request.body)
-    res = UserSerializer(data=user)
-    if res.is_valid():
+    try:
+        user = json.loads(request.body)
+        res = UserSerializer(data=user)
+        print('debug->', res.is_valid())
+        print('->', res.data)
         res.create(res.data)
         return JsonResponse({'message': 'user save!', 'data': res.data})
-    else:
-        return JsonResponse({'message': 'Error: save user...'})
+    except res.is_valid():
+        return JsonResponse({'message': 'Error: save user...'}, status=501)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])

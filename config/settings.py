@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'corsheaders',
     # apps
-    'apps.user'
+    'apps.user',
+    'apps.routes_access',
 ]
 
 MIDDLEWARE = [

@@ -20,7 +20,9 @@ from django.conf.urls import handler404
 handler404 = TemplateView.as_view(template_name='index.html')
 
 urlpatterns = [
+    # paths API
     path('api/', include('apps.urls')),
+    # path SPA
     path('<path:resource>', TemplateView.as_view(template_name='index.html')),
     path('', TemplateView.as_view(template_name='index.html')),
 ]

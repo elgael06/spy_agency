@@ -147,4 +147,4 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 STATIC_ROOT = STATIC_FILES
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

@@ -7,4 +7,5 @@ pytz==2020.1
 sqlparse==0.3.1
 uuid==1.30
 whitenoise==5.2.0
+Werkzeug==1.0.1
 django-heroku

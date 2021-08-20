@@ -14,16 +14,28 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# TPL_DIR = os.path.join(BASE_DIR, 'templates/')
+# DB_FILE = os.path.join(BASE_DIR, 'database/db.sqlite3')
+# CACHE_DIR = os.path.join(BASE_DIR, 'files/cache/')
+# MEDIA = os.path.join(BASE_DIR, 'files/media/')
+# STATIC = os.path.join(BASE_DIR, 'static/')
+# STATIC_FILES = os.path.join(BASE_DIR, 'files/static_files/')
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-TPL_DIR = os.path.join(BASE_DIR, 'templates/')
-DB_FILE = os.path.join(BASE_DIR, 'database/db.sqlite3')
+TPL_DIR = os.path.join(BASE_DIR, 'build/')
+DB_FILE = os.path.join(BASE_DIR, 'database/database.sqlite3')
 CACHE_DIR = os.path.join(BASE_DIR, 'files/cache/')
 MEDIA = os.path.join(BASE_DIR, 'files/media/')
-STATIC = os.path.join(BASE_DIR, 'static/')
+STATIC = os.path.join(BASE_DIR, 'build/static/')
 STATIC_FILES = os.path.join(BASE_DIR, 'files/static_files/')
+
 
 
 # Quick-start development settings - unsuitable for production

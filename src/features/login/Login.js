@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Form, Input, Button} from 'antd';
+import { Link } from 'react-router-dom';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {
     handleEmail,
     handlePassword,
@@ -43,6 +45,7 @@ const Login = () => {
             name="email"
             rules={[{required: true,message: 'Please input your email!'},]}>
             <Input
+                prefix={<UserOutlined className="site-form-item-icon" />} 
                 type='email'
                 placeholder='email...'
                 value={email}
@@ -55,16 +58,15 @@ const Login = () => {
             name="password"
             rules={[{required: true,message: 'Please input your password!'},]}>
             <Input.Password
+                prefix={<LockOutlined className="site-form-item-icon" />} 
                 type='password'
                 placeholder='password...'
                 value={password}
                 onChange={e=>dispatch(handlePassword(e.target.value))}
             />
         </Form.Item>
-        <Button loading={loading} shape="round" block type="primary" htmlType="submit" >ENTER</Button>
-        <br/>
-
-        <Button block type="link" onClick={()=>history.push('/account')} >create Acount</Button>
+        <Button loading={loading} block type="primary" htmlType="submit" >ENTER</Button>
+          <p style={{textAlign: 'left',padding:10}}> Or <Link to="/account" >register now!</Link></p>
     </LayoutLogin>
 }
 

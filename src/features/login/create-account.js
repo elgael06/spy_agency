@@ -4,6 +4,7 @@ import {Form, Input, Button} from 'antd';
 import {
     createAccountAsync,
     handleEmail,
+    handlePassword,
     selectLogin,
 } from './loginSlice';
 import LayoutLogin from "./components/layout-login";
@@ -14,11 +15,12 @@ const initialState = {
     name:'',
     last_name:'',
     nikename: '',
+    confirm:'',
 };
 
 const CreateAccount = () => {
     const history = useHistory();
-    const { email,loading } = useSelector(selectLogin);
+    const { email,password,loading } = useSelector(selectLogin);
     const [state, setState] = useState(initialState);
     const dispatch = useDispatch();
 
@@ -29,11 +31,17 @@ const CreateAccount = () => {
     // event
     const handleSubmit = e => {
         e.preventDefault();
+        if(password !== state.confirm || password ==='' || state.confirm===''){
+            alert('Please enter your password correct!');
+            return;
+        }
+
         console.log('create...',{
             ...state,
-            email
+            email,
+            password,
         });
-        dispatch(createAccountAsync({...state,email}));
+        dispatch(createAccountAsync({...state,email,password}));
         setState(initialState);
         history.push('/login')
     }
@@ -94,6 +102,28 @@ const CreateAccount = () => {
                 placeholder='email...'
                 value={email}
                 onChange={e=>dispatch(handleEmail(e.target.value))}
+            />
+        </Form.Item>
+        {/* password */}
+        <Form.Item
+            label="Password"
+            name="password"
+            rules={[{required: true,message: 'Please input your password!'},]}>
+            <Input
+                placeholder='password...'
+                value={password}
+                onChange={e=>dispatch(handlePassword(e.target.value))}
+            />
+        </Form.Item>
+        {/* Confirm */}
+        <Form.Item
+            label="Confirm"
+            name="confirm"
+            rules={[{required: true,message: 'Please input your password confirm!'},]}>
+            <Input.Password
+                placeholder='Confirm...'
+                value={state.confirm}
+                onChange={hanldeChange('confirm')}
             />
         </Form.Item>
 

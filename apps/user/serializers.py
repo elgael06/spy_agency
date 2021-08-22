@@ -21,8 +21,13 @@ class UserSerializer(ModelSerializer):
     created = DateTimeField()
     date_out = DateTimeField()
 
-    def create(self, validate_data) -> User:
-        return User.objects.create(**validate_data)
+    def create(self, validate_data, password) -> User:
+        user = User.objects.create(**validate_data)
+        account = UserAccount.objects.get(email=user.email)
+        if password != '':
+            account.password = account.change_password(password)
+            account.save(update_fields=['password'])
+        return user
 
     def update(self, instance, validated_data) -> User:
         instance.name = validated_data.get('name', instance.name)

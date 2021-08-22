@@ -22,9 +22,10 @@ email='',
 last_name='',
 name='',
 nikename='',
+password='',
 }) => {
     const { status, data } = await axios.post('/api/user/register',
-        { email, last_name, name, nikename, });
+        { email, last_name, name, nikename,password, });
 
     return status===200 ? data : null;
 }

@@ -83,10 +83,18 @@ def users_list(request):
 def user_register(request):
     try:
         user = json.loads(request.body)
-        res = UserSerializer(data=user)
+        print('->', user)
+        passwod = user.get('password') if user.get('password') else ''
+        res = UserSerializer(data={
+            'name': user.get('name'),
+            'last_name': user.get('last_name'),
+            'nikename': user.get('nikename'),
+            'email': user.get('email'),
+        })
         print('debug->', res.is_valid())
         print('->', res.data)
-        res.create(res.data)
+        res.create(res.data, passwod)
+
         return JsonResponse({'message': 'user save!', 'data': res.data})
     except res.is_valid():
         return JsonResponse({'message': 'Error: save user...'}, status=501)

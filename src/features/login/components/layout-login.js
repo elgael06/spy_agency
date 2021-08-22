@@ -22,13 +22,13 @@ const LayoutLogin = ({
             <Form
                 style={{
                     display:'flex',
-                    marginTop:-80,
-                    minHeight:500,
+                    maxHeight:'calc( 100% - 20px )',
                     width:450,
                     justifyContent:'space-between',
                     flexDirection:'column',
                     background: '#fff',
-                    padding:'20px 35px'
+                    padding:'20px 35px',
+                    overflow:'auto',
                 }}
                 form={form}
               name="basic"

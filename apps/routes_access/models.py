@@ -34,6 +34,6 @@ class MenusRole(models.Model):
 
 
 class UserRole(models.Model):
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    id_role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
 

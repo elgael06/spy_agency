@@ -1,6 +1,6 @@
 from django.urls import path, include
-
+from .views import rol_user
 urlpatterns = [
-    path('access/', include('apps.user.urls'))
+    path('routes/<int:pk>', rol_user),
 ]
 

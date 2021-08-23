@@ -6,7 +6,6 @@ import { useHistory } from "react-router";
 const Page404 = () => {
     const history = useHistory();
 
-    console.log('history',history)
     return (<Result
         status="404"
         title="404"

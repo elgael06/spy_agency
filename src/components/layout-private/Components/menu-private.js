@@ -10,8 +10,10 @@ import '../layout-private.css';
 import SubMenu from "antd/lib/menu/SubMenu";
 import { useSelector } from 'react-redux';
 import { selectLoaddin } from '../layout-privateSlice';
+import { useHistory } from "react-router";
 
 const MenuPrivate = ({data}) => {
+  const history = useHistory();
   const loaddin = useSelector(selectLoaddin);
 
     const checked_icon = {
@@ -19,6 +21,10 @@ const MenuPrivate = ({data}) => {
       'HITMEN':<UserOutlined />,
       'SETTING':<SettingOutlined />
     }  
+
+    const changeRoute = url => {
+      history.push(url);
+    }
 
     return (<Menu 
       theme="dark" 
@@ -37,6 +43,7 @@ const MenuPrivate = ({data}) => {
             link=> <Menu.Item 
               key={`route_${link.id}`}
               title={`${item.name} > ${link.name}`}
+              onClick={()=>changeRoute(link.url)}
               icon={ <ArrowRightOutlined /> 
               }>
                 {link.name}

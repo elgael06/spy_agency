@@ -1,5 +1,6 @@
 import axios from "axios";
 import { notification } from 'antd';
+import { setToken } from "../../functions/setToken";
 
 export const singInUserApi = async ({
     email='',
@@ -9,10 +10,7 @@ export const singInUserApi = async ({
         email,
         password,
     }).catch() || {};
-    axios.defaults.headers.post['Token'] = data.token;
-    axios.defaults.headers.get['Token'] = data.token;
-    axios.defaults.headers.put['Token'] = data.token;
-    axios.defaults.headers.delete['Token'] = data.token;
+    setToken(data.token);
 
     if (data.status){ notification.open({
         message: 'Login',

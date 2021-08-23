@@ -1,12 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createAccountApi, singInUserApi, logoutAPI } from './loginAPI';
+import persistedState from '../../app/initialState';
 
-const initialState = {
-    email:'',
-    password:'',
-    sesion:null,
-    loading:false,
-};
+
 export const singInUser = createAsyncThunk(
     'login/sinIn',
     async ({email='',password=''})=>{
@@ -25,7 +21,7 @@ export const createAccountAsync = createAsyncThunk(
 );
 const loginSlice = createSlice({
     name:'login',
-    initialState,
+    initialState:persistedState.login,
     reducers:{
         handleEmail:(state,action)=>{
             state.email = action.payload;

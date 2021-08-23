@@ -8,13 +8,15 @@ import {
 import { handleCollapsed, selectCollapsed } from '../layout-private/layout-privateSlice';
 import { Button } from "antd/lib/radio";
 import { selectSesion, singOutUser } from "../../features/login/loginSlice";
+import { useHistory } from "react-router";
 const { Header } = Layout;
 
 
 const HeaderApp = () => {
   const  sesion = useSelector(selectSesion);
   const collapsed =useSelector(selectCollapsed);
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
     return(<Header className="site-layout-background" style={{ padding: '3px 12px' }}>
             <div>
@@ -26,7 +28,10 @@ const dispatch = useDispatch();
                 })
               }
               <Button 
-                onClick= {()=> dispatch(singOutUser(sesion?.user.id))}
+                onClick= {()=> {
+                  dispatch(singOutUser(sesion?.user.id))
+                  history.push('/')
+                }}
                 style={{
                   float: 'right', 
                   background:'red',

@@ -4,8 +4,8 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import LoginRouter from "../../features/login/login.router";
-import HomeRouter from "../../features/home/home.router";
+import PublicRouter from "../../features/public.router";
+import PrvateRouter from "../../features/private.router";
 import {useSelector} from "react-redux";
 import {selectSesion} from "../../features/login/loginSlice";
 import LayoutPrivate from "../../components/layout-private/layout-private";
@@ -15,7 +15,7 @@ const PrivateRoute = () => (
     <Router>
             <Switch>
                 <LayoutPrivate>
-                    <Route path='/' component={HomeRouter} />
+                    <Route path='/' component={PrvateRouter} />
                 </LayoutPrivate>
             </Switch>
     </Router>
@@ -24,7 +24,7 @@ const PrivateRoute = () => (
 const PubicRoute = () => (
     <Router>
             <Switch>
-                <Route path='/' component={LoginRouter} />
+                <Route path='/' component={PublicRouter} />
             </Switch>
     </Router>
 );

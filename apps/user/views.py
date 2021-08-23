@@ -12,6 +12,9 @@ from .models import (
     User,
     UserAccount,
 )
+from ..routes_access.models import (
+    UserRole
+)
 from ..middleware.account import check_account
 
 
@@ -33,6 +36,16 @@ def user_account_login(request):
                 user = login.get_user_where_email()
                 user_serializer = UserSerializer(user)
 
+                print('pk->',user.id)
+                try:
+                    role = UserRole.objects.get(user= user.id)
+                    role_name = ''
+
+                    print( role)
+                    role_name = role.role.name if role else ''
+                except :
+                    role_name =''
+
                 # Check user is out of system
                 if user_serializer.data['is_out']:
                     return JsonResponse({'message': 'User not authorized!'}, status=401)
@@ -47,6 +60,7 @@ def user_account_login(request):
                     'id_account': account_serializer.data['id'],
                     'token': account_serializer.data['token'],
                     'user': user_serializer.data,
+                    'role': role_name,
                     'status':True,
                 }, status=200)
             else:

@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu,  Skeleton } from 'antd';
+import { Menu, Skeleton, Divider } from 'antd';
 import {
   FolderFilled,
   ArrowRightOutlined,
@@ -24,9 +24,10 @@ const MenuPrivate = ({data}) => {
       theme="dark" 
       mode="inline" 
     >
+      <Divider style={{color: '#FFF'}} >MENU</Divider>
       <Skeleton loading={loaddin} active  >
       </Skeleton> 
-      {!loaddin && data.map((item)=>{
+      {!loaddin && (data.length>0 ? data.map((item)=>{
         return (<SubMenu key={`sub_${item.id}`} title={item.name}  icon={ checked_icon[item.name] || <FolderFilled />} >
         {
           item
@@ -41,7 +42,7 @@ const MenuPrivate = ({data}) => {
                 {link.name}
               </Menu.Item> )
         } 
-        </SubMenu>)}) 
+        </SubMenu>)}) : <Menu.Item disabled >Not Access</Menu.Item>)
       }
     </Menu>);
 }

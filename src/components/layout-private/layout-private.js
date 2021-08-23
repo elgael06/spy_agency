@@ -4,7 +4,7 @@ import './layout-private.css';
 import MenuPrivate from "./Components/menu-private";
 import HeaderApp from "../header-app/header-app";
 import { selectSesion } from "../../features/login/loginSlice";
-import { getAllRoutesAccessAPI, handleCollapsed, selectCollapsed, selectMenus } from "./layout-privateSlice";
+import { getAllRoutesAccessAPI, selectCollapsed, selectMenus } from "./layout-privateSlice";
 import { useSelector, useDispatch } from 'react-redux';
 
 const { Sider, Content, Footer } = Layout;
@@ -21,14 +21,9 @@ const LayoutPrivate = ({
 	useEffect(() => {
 		console.log('sesion->',sesion);
 		console.log('menu->',menu);
-		console.log('collapsed->',collapsed);
 		dispatch(getAllRoutesAccessAPI(sesion.id_account));
 		
 	},[sesion]);
-
-    const toggle = () => {
-        dispatch(handleCollapsed(!collapsed));
-    }
 
     return (
       <>
@@ -41,10 +36,7 @@ const LayoutPrivate = ({
           <MenuPrivate data={menu} />
         </Sider>
         <Layout className="site-layout">
-            <HeaderApp
-                collapsed={collapsed}
-                toggle={toggle}
-            />
+            <HeaderApp />
           <Content
             className="site-layout-background"
             style={{

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Form, Input, Button} from 'antd';
 import { Link } from 'react-router-dom';
@@ -10,22 +10,15 @@ import {
     singInUser,
 } from './loginSlice';
 import LayoutLogin from "./components/layout-login";
-import {useHistory} from "react-router";
 
 
 const Login = () => {
-    const history = useHistory();
     const { email,password,loading } = useSelector(selectLogin);
     const dispatch = useDispatch();
-
-    useEffect(()=>{
-        console.log('login',{ email,password });
-    },[])
 
     // event
     const handleSubmit = e => {
         e.preventDefault();
-        console.log('send...');
         if(email && password){
             dispatch(singInUser({
                     email,

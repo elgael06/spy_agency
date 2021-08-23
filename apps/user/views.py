@@ -43,30 +43,34 @@ def user_account_login(request):
                 account_serializer = UserAccountSerializer(login)
 
                 return JsonResponse({
-                    'message': 'Login user...',
+                    'message': 'Login user ok...',
                     'id_account': account_serializer.data['id'],
                     'token': account_serializer.data['token'],
                     'user': user_serializer.data,
+                    'status':True,
                 }, status=200)
             else:
                 return JsonResponse({
-                    'message': 'ERROR:password!'
-                }, status=401)
+                    'message': 'ERROR: password!',
+                    'status':False,
+                })
         else:
             return HttpResponse(status=404)
 
     # User Not Exist Exception
     except UserAccount.DoesNotExist:
         return JsonResponse({
-            'message': 'ERROR:email not exist!'
-        }, status=501)
+            'message': 'ERROR:email not exist!',
+            'status':False,
+        })
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def user_account_logout(request, pk):
-    user_account = UserAccount.get(pk=pk)
+    user_account = UserAccount.objects.get(pk=pk)
     user_account.create_token()
-    return JsonResponse({'message': 'ok'}, status=200)
+    user_account.save(update_fields=['token'])
+    return JsonResponse({'message': 'Logout success!'})
 
 
 @api_view(['GET', 'POST'])

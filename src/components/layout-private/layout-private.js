@@ -20,10 +20,8 @@ const LayoutPrivate = ({
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log('sesion->',sesion);
-		console.log('menu->',menu);
 		dispatch(getAllRoutesAccessAPI(sesion.id_account));
-		
+    return null		
 	},[sesion]);
 
     return (

@@ -7,10 +7,12 @@ import {
 } from '@ant-design/icons';
 import { handleCollapsed, selectCollapsed } from '../layout-private/layout-privateSlice';
 import { Button } from "antd/lib/radio";
+import { selectSesion, singOutUser } from "../../features/login/loginSlice";
 const { Header } = Layout;
 
 
 const HeaderApp = () => {
+  const  sesion = useSelector(selectSesion);
   const collapsed =useSelector(selectCollapsed);
 const dispatch = useDispatch();
 
@@ -24,6 +26,7 @@ const dispatch = useDispatch();
                 })
               }
               <Button 
+                onClick= {()=> dispatch(singOutUser(sesion?.user.id))}
                 style={{
                   float: 'right', 
                   background:'red',

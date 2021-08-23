@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Space, Skeleton, Divider } from 'antd';
+import { Menu,  Skeleton } from 'antd';
 import {
   FolderFilled,
   ArrowRightOutlined,
@@ -27,14 +27,14 @@ const MenuPrivate = ({data}) => {
       <Skeleton loading={loaddin} active  >
       </Skeleton> 
       {!loaddin && data.map((item)=>{
-        return (<SubMenu key={item.id} title={item.name}  icon={ checked_icon[item.name] || <FolderFilled />} >
+        return (<SubMenu key={`sub_${item.id}`} title={item.name}  icon={ checked_icon[item.name] || <FolderFilled />} >
         {
           item
           .links
           .filter((link)=>link.status)
           .map(
             link=> <Menu.Item 
-              key={link.id}
+              key={`route_${link.id}`}
               title={`${item.name} > ${link.name}`}
               icon={ <ArrowRightOutlined /> 
               }>

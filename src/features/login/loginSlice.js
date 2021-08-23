@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {createAccountApi, singInUserApi} from "./loginAPI";
+import { createAccountApi, singInUserApi, logoutAPI } from './loginAPI';
 
 const initialState = {
     email:'',
@@ -13,6 +13,10 @@ export const singInUser = createAsyncThunk(
         const data = await singInUserApi({email, password});
         return data;
     }
+);
+export const singOutUser = createAsyncThunk(
+  'login/sinOut',
+    logoutAPI
 );
 
 export const createAccountAsync = createAsyncThunk(
@@ -51,6 +55,10 @@ const loginSlice = createSlice({
         .addCase(singInUser.rejected,(state)=>{
             state.loading = false;
             state.sesion = null;
+        }).addCase(singOutUser.fulfilled,(state, action)=>{
+          if (action.payload){
+            state.sesion = null;
+          }
         });
   },
 });

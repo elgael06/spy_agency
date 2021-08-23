@@ -15,6 +15,7 @@ from .models import (
 
 
 @api_view(['GET'])
+@check_account
 def rol_user(request, pk):
     print('pk->', pk)
     data = []

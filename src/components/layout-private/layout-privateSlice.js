@@ -1,21 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getAllRoutesAccess } from './layout-privateAPI';
 
+import initialState from '../../app/initialState';
+
 
 export const getAllRoutesAccessAPI = createAsyncThunk(
     'layout/menus',
     getAllRoutesAccess
 ); 
 
-const initialState = {
-    menus: [],
-    loaddin: false,
-    collapsed:false,
-}
 
 const layoutSlice = createSlice({
     name:'layout',
-    initialState,
+    initialState:initialState.layout,
     reducers:{
         handleCollapsed:(state,action)=>{
             state.collapsed = action.payload;
@@ -38,8 +35,8 @@ const layoutSlice = createSlice({
 }); 
 
 export const { handleCollapsed } = layoutSlice.actions;
-export const selectMenus = (state, action)=> state.layout.menus;
-export const selectLoaddin = (state, action)=> state.layout.loaddin;
-export const selectCollapsed = (state, action)=> state.layout.collapsed;
+export const selectMenus = (state, action)=> state?.layout?.menus;
+export const selectLoaddin = (state, action)=> state?.layout?.loaddin;
+export const selectCollapsed = (state, action)=> state?.layout?.collapsed;
 
 export default layoutSlice.reducer;

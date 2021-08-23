@@ -33,7 +33,7 @@ const MenuPrivate = ({data}) => {
       <Divider style={{color: '#FFF'}} >MENU</Divider>
       <Skeleton loading={loaddin} active  >
       </Skeleton> 
-      {!loaddin && (data.length>0 ? data.map((item)=>{
+      {!loaddin && (data?.length>0 ? data.map((item)=>{
         return (<SubMenu key={`sub_${item.id}`} title={item.name}  icon={ checked_icon[item.name] || <FolderFilled />} >
         {
           item

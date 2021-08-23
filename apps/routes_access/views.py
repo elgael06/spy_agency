@@ -15,7 +15,6 @@ from .models import (
 
 
 @api_view(['GET'])
-@check_account
 def rol_user(request, pk):
     print('pk->', pk)
     data = []
@@ -24,7 +23,7 @@ def rol_user(request, pk):
         rol = UserRole.objects.get(user=pk)
         print('rol->', rol.check())
     except :
-        return JsonResponse({'data': data, 'message': 'not rol access.'}, status=404)
+        return JsonResponse({'data': data, 'message': 'not rol access.'})
     # obtenemos menus de roll
     menus = MenusRole.objects.filter(role=rol.role_id)
     # recorremos los menus para obtener los links
@@ -32,11 +31,12 @@ def rol_user(request, pk):
         payload = {
             'id': menu.menu_id,
             'name': menu.menu.name,
+            'show':menu.show,
+            'edit':menu.edit,
             'links': [],
         }
         links = LinksMenus.objects.filter(menu=menu.menu_id)
         for link in links:
-            acc = link.link
             payload['links'].append({
                 'id': link.link_id,
                 'name': link.link.nameAccess,

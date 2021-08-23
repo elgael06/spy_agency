@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import { Layout } from 'antd';
+import {Link} from 'react-router-dom';
 import './layout-private.css';
 import MenuPrivate from "./Components/menu-private";
 import HeaderApp from "../header-app/header-app";
@@ -29,9 +30,11 @@ const LayoutPrivate = ({
       <>
         <Sider trigger={null} collapsible collapsed={collapsed}>
             <div className="logo" >
+				<Link to='/home'>
                 <h2 style={{color:'#FFF',margin:15}}>
                     {!collapsed ? 'Company Spy' : 'CS'}
                 </h2>
+				</Link>
             </div>
           <MenuPrivate data={menu} />
         </Sider>

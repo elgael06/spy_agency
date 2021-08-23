@@ -39,6 +39,7 @@ const layoutSlice = createSlice({
 
 export const { handleCollapsed } = layoutSlice.actions;
 export const selectMenus = (state, action)=> state.layout.menus;
+export const selectLoaddin = (state, action)=> state.layout.loaddin;
 export const selectCollapsed = (state, action)=> state.layout.collapsed;
 
 export default layoutSlice.reducer;

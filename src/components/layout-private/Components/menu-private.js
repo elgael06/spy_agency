@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu } from 'antd';
+import { Menu, Space, Skeleton, Divider } from 'antd';
 import {
   FolderFilled,
   ArrowRightOutlined,
@@ -8,8 +8,11 @@ import {
 } from '@ant-design/icons';
 import '../layout-private.css';
 import SubMenu from "antd/lib/menu/SubMenu";
+import { useSelector } from 'react-redux';
+import { selectLoaddin } from '../layout-privateSlice';
 
 const MenuPrivate = ({data}) => {
+  const loaddin = useSelector(selectLoaddin);
 
     const checked_icon = {
       'HIT': <FolderFilled />,
@@ -21,7 +24,9 @@ const MenuPrivate = ({data}) => {
       theme="dark" 
       mode="inline" 
     >
-      {data.map((item)=>{
+      <Skeleton loading={loaddin} active  >
+      </Skeleton> 
+      {!loaddin && data.map((item)=>{
         return (<SubMenu key={item.id} title={item.name}  icon={ checked_icon[item.name] || <FolderFilled />} >
         {
           item
@@ -36,8 +41,8 @@ const MenuPrivate = ({data}) => {
                 {link.name}
               </Menu.Item> )
         } 
-        </SubMenu>)})
-      }         
+        </SubMenu>)}) 
+      }
     </Menu>);
 }
 

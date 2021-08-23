@@ -1,26 +1,30 @@
 import React from "react";
 import { Menu } from 'antd';
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
+  FolderFilled,
+  ArrowRightOutlined
 } from '@ant-design/icons';
 import '../layout-private.css';
+import SubMenu from "antd/lib/menu/SubMenu";
 
-const MenuPrivate = () => {
+const MenuPrivate = ({data}) => {
 
-    return (<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />} >
-              nav 1
-            </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
-            </Menu.Item>
+  
+
+    return (<Menu 
+      theme="dark" 
+      mode="inline" 
+    >
+      {data.map((item)=>{
+        return (<SubMenu key={item.id} title={item.name}  icon={<FolderFilled />} >
+        {
+          item
+          .links
+          .filter((link)=>link.status)
+          .map(link=> <Menu.Item key={link.id} icon={ <ArrowRightOutlined /> }>{link.name}</Menu.Item> )
+        } 
+        </SubMenu>)})
+      }         
     </Menu>);
 }
 

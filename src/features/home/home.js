@@ -7,14 +7,9 @@ import {Button} from "antd";
 const Home = () => {
     const  sesion = useSelector(selectSesion);
 
-    const consultar = async () =>{
-        const resp = await axios.get('/api/access/routes/'+sesion.id_account);
-        console.log('resp->',resp);
-    }
     console.log('sesion->',sesion)
     return (<>
         <h3>Home page</h3>
-        <Button onClick={consultar} >Consultar</Button>
     </>)
 }
 

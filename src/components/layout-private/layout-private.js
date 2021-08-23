@@ -1,8 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Layout } from 'antd';
 import './layout-private.css';
 import MenuPrivate from "./Components/menu-private";
 import HeaderApp from "../header-app/header-app";
+import { selectSesion } from "../../features/login/loginSlice";
+import { getAllRoutesAccessAPI, handleCollapsed, selectCollapsed, selectMenus } from "./layout-privateSlice";
+import { useSelector, useDispatch } from 'react-redux';
 
 const { Sider, Content, Footer } = Layout;
 
@@ -10,10 +13,21 @@ const { Sider, Content, Footer } = Layout;
 const LayoutPrivate = ({
     children=null
 }) => {
-    const [collapsed, setCollapsed] = useState(false);
+    const  sesion = useSelector(selectSesion);
+    const  menu = useSelector(selectMenus);
+    const collapsed =useSelector(selectCollapsed);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		console.log('sesion->',sesion);
+		console.log('menu->',menu);
+		console.log('collapsed->',collapsed);
+		dispatch(getAllRoutesAccessAPI(sesion.id_account));
+		
+	},[sesion]);
 
     const toggle = () => {
-        setCollapsed(!collapsed);
+        dispatch(handleCollapsed(!collapsed));
     }
 
     return (
@@ -24,7 +38,7 @@ const LayoutPrivate = ({
                     {!collapsed ? 'Company Spy' : 'CS'}
                 </h2>
             </div>
-          <MenuPrivate />
+          <MenuPrivate data={menu} />
         </Sider>
         <Layout className="site-layout">
             <HeaderApp

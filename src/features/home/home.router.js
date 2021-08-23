@@ -7,7 +7,7 @@ import {
 
 
 const Home = lazy(()=>import("./home"));
-const Page404 = lazy(()=>import("./page-404"));
+const Page404 = lazy(()=>import("../results/page-404"));
 
 const HomeRouter = () => (
     <Suspense fallback={<div>loading...</div>} >
